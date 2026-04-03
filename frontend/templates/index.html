@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudySaarthi - Your Autonomous Learning Agent</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">📚</span>
+                <h1>StudySaarthi</h1>
+                <p class="tagline">Your Autonomous Learning Companion</p>
+            </div>
+            <div class="nav-stats">
+                <span id="session-id" class="session-badge">Session: Loading...</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Welcome to Your Personalized Learning Journey</h2>
+            <p>StudySaarthi intelligently adapts to what you want to learn - just tell us your topic!</p>
+        </section>
+
+        <!-- Input Section -->
+        <section class="input-section">
+            <div class="input-card">
+                <h3>📝 What would you like to learn?</h3>
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="topic-input" 
+                        placeholder="e.g., Photosynthesis, World War 2, Artificial Intelligence..."
+                        autocomplete="off"
+                    >
+                    <button id="learn-btn" class="btn btn-primary">
+                        <span class="btn-text">Start Learning</span>
+                        <span class="btn-loader" style="display:none;">
+                            <span class="spinner"></span>
+                        </span>
+                    </button>
+                </div>
+                <p class="input-hint">✨ Our AI agent will classify your topic and create a custom learning path</p>
+                <div id="error-message" class="error-message" style="display:none;"></div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" class="results-section" style="display:none;">
+            
+            <!-- Topic Classification Card -->
+            <div class="result-card classification-card">
+                <div class="card-header">
+                    <h3>🎯 Topic Classified</h3>
+                </div>
+                <div class="card-content">
+                    <div class="topic-info">
+                        <div class="topic-title">
+                            <span id="result-topic" class="topic-name">—</span>
+                        </div>
+                        <div class="category-badge" id="category-badge">
+                            <span id="result-category">—</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Explanation Card -->
+            <div class="result-card explanation-card">
+                <div class="card-header">
+                    <h3>💡 Explanation</h3>
+                    <span class="card-icon">🔍</span>
+                </div>
+                <div class="card-content">
+                    <div id="result-explanation" class="content-text">—</div>
+                </div>
+            </div>
+
+            <!-- Study Notes Card -->
+            <div class="result-card notes-card">
+                <div class="card-header">
+                    <h3>📋 Study Notes</h3>
+                    <span class="card-icon">📖</span>
+                </div>
+                <div class="card-content">
+                    <div id="result-notes" class="content-text" style="white-space: pre-wrap;">—</div>
+                    <button class="btn btn-secondary btn-sm" onclick="copyToClipboard('result-notes')">
+                        📋 Copy Notes
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Section -->
+            <div class="result-card quiz-card">
+                <div class="card-header">
+                    <h3>❓ Test Your Knowledge</h3>
+                    <span class="card-icon">🧠</span>
+                </div>
+                <div class="card-content">
+                    <div id="result-quiz" class="content-text" style="white-space: pre-wrap;">—</div>
+                    <button class="btn btn-secondary btn-sm" onclick="copyToClipboard('result-quiz')">
+                        📋 Copy Quiz
+                    </button>
+                </div>
+            </div>
+
+            <!-- Next Topics Card -->
+            <div class="result-card next-topics-card">
+                <div class="card-header">
+                    <h3>🚀 What to Learn Next</h3>
+                    <span class="card-icon">📍</span>
+                </div>
+                <div class="card-content">
+                    <div id="result-next-topics" class="content-text" style="white-space: pre-wrap;">—</div>
+                    <button class="btn btn-secondary btn-sm" onclick="learnFromSuggestion('result-next-topics')">
+                        🔄 Learn Suggested Topic
+                    </button>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn btn-outline" onclick="resetForm()">← Learn Another Topic</button>
+                <button class="btn btn-secondary" onclick="viewProgress()">📊 View Progress</button>
+            </div>
+        </section>
+
+        <!-- Progress Section -->
+        <section id="progress-section" class="progress-section" style="display:none;">
+            <div class="result-card">
+                <div class="card-header">
+                    <h3>📊 Your Learning Progress</h3>
+                    <button class="btn btn-outline btn-sm" onclick="closeProgress()">Close</button>
+                </div>
+                <div class="card-content">
+                    <div id="stats-container" class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="total-sessions">0</div>
+                            <p class="stat-label">Sessions Completed</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="total-topics">0</div>
+                            <p class="stat-label">Topics Learned</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="science-topics">0</div>
+                            <p class="stat-label">Science/Math Topics</p>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="history-topics">0</div>
+                            <p class="stat-label">History/GK Topics</p>
+                        </div>
+                    </div>
+                    
+                    <div id="topics-list" style="margin-top: 20px;">
+                        <h4>Your Topics:</h4>
+                        <ul id="learned-topics" style="list-style-position: inside; line-height: 1.8;">
+                            <li>No topics learned yet</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features-section">
+            <h2>How StudySaarthi Works</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">👁️</div>
+                    <h3>Perception</h3>
+                    <p>Understands your learning topic and extracts key concepts</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Reasoning</h3>
+                    <p>Intelligently classifies topics into categories (Science, History, General)</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📐</div>
+                    <h3>Planning</h3>
+                    <p>Designs a customized learning workflow tailored to each category</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Action</h3>
+                    <p>Generates explanations, notes, quizzes, and next topic suggestions</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 StudySaarthi - Autonomous Learning Agent for ORBIT Hyperthon</p>
+            <p class="credits">Built with 💚 using Flask, OpenAI, and modern web technologies</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# StudySaarthi: Autonomous Learning Agent
+# Core Dependencies
+
+# Web Framework
+Flask==2.3.3
+Werkzeug==2.3.7
+
+# API and AI
+openai==0.27.8
+requests==2.31.0
+
+# Environment Management
+python-dotenv==1.0.0
+
+# Utilities
+python-dateutil==2.8.2
+
+# Production Server (optional)
+gunicorn==21.2.0
