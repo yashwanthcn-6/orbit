@@ -11,6 +11,7 @@ load_dotenv()
 
 # OpenAI API Configuration
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')
+OPENAI_ENABLED = os.getenv('OPENAI_ENABLED', 'true').strip().lower() in ('1', 'true', 'yes', 'on')
 
 # Flask Configuration
 FLASK_ENV = os.getenv('FLASK_ENV', 'development')

@@ -213,6 +213,26 @@ body {
     margin-top: 12px;
 }
 
+.mode-banner {
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+}
+
+.mode-local {
+    background: rgba(245, 158, 11, 0.12);
+    color: #92400e;
+    border-color: rgba(245, 158, 11, 0.35);
+}
+
+.mode-openai {
+    background: rgba(16, 185, 129, 0.12);
+    color: #065f46;
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
 /* ==================== 
    Buttons
    ==================== */

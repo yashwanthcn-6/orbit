@@ -157,6 +157,8 @@ function submitTopic() {
  * Display agent results on the UI
  */
 function displayResults(data) {
+    updateModeBanner(data.mode);
+
     // Update classification card
     document.getElementById('result-topic').textContent = capitalizeWords(data.topic);
     
@@ -198,6 +200,23 @@ function hideFeatures() {
     if (featuresSection) {
         featuresSection.style.display = 'none';
     }
+}
+
+function updateModeBanner(mode) {
+    const banner = document.getElementById('mode-banner');
+    if (!banner) {
+        return;
+    }
+
+    if (mode === 'local') {
+        banner.textContent = 'Running in local study mode because OpenAI is currently unavailable.';
+        banner.className = 'mode-banner mode-local';
+    } else {
+        banner.textContent = 'Connected to OpenAI for live AI-generated study content.';
+        banner.className = 'mode-banner mode-openai';
+    }
+
+    banner.style.display = 'block';
 }
 
 // ============================================

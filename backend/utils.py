@@ -134,7 +134,8 @@ def format_response_for_frontend(agent_result):
         'notes': agent_result.get('notes'),
         'quiz': agent_result.get('quiz'),
         'next_topics': agent_result.get('next_topic'),
-        'timestamp': agent_result.get('timestamp')
+        'timestamp': agent_result.get('timestamp'),
+        'mode': agent_result.get('mode', 'openai')
     }
 
 
