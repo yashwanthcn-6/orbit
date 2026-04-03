@@ -50,60 +50,9 @@ studysaarthi-agent/
 
 ---
 
-## 🚀 Quick Start
 
-### Prerequisites
-- Python 3.8+
-- pip (Python package manager)
-- OpenAI API Key (free or paid account)
 
-### 1. Clone/Setup Project
-```bash
-# Navigate to project directory
-cd studysaarthi-agent
-
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
-```
-
-### 2. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### 3. Configure Environment
-```bash
-# Copy the example env file
-cp .env.example .env
-
-# Edit .env and add your OpenAI API key
-# (Open .env in your text editor and paste your key)
-```
-
-### 4. Run the Application
-```bash
-# Start the Flask backend server
-python backend/app.py
-```
-
-You should see:
-```
-==================================================
-StudySaarthi - Autonomous Learning Agent
-==================================================
-Environment: development
-Debug Mode: True
-
-Starting Flask server...
-Visit http://localhost:5000 in your browser
-==================================================
-```
+Y
 
 ### 5. Open in Browser
 Visit: **http://localhost:5000**
@@ -152,12 +101,6 @@ User Gets: Explanation, Notes, Quiz, Next Topics
 
 ---
 
-## 🔑 Getting Your OpenAI API Key
-
-1. Go to: https://platform.openai.com/account/api-keys
-2. Log in with your OpenAI account (create one if needed)
-3. Click "Create new secret key"
-4. Copy the key and paste it in your `.env` file
 
 > **Note**: Free tier accounts get $5 credits. Each API call costs small amount.
 
