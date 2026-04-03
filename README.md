@@ -102,77 +102,11 @@ User Gets: Explanation, Notes, Quiz, Next Topics
 ---
 
 
-> **Note**: Free tier accounts get $5 credits. Each API call costs small amount.
 
----
 
-## 📖 API Endpoints
 
-### 1. Start Learning
-**POST** `/api/learn`
-```json
-// Request
-{
-  "topic": "Photosynthesis",
-  "user_id": "optional_user_id"
-}
 
-// Response
-{
-  "success": true,
-  "topic": "photosynthesis",
-  "category": "science_math",
-  "explanation": "...",
-  "notes": "...",
-  "quiz": "...",
-  "next_topics": "...",
-  "user_id": "...",
-  "timestamp": "2024-..."
-}
-```
 
-### 2. Get User Progress
-**GET** `/api/progress/{user_id}`
-```json
-// Response
-{
-  "success": true,
-  "progress": [...],
-  "count": 5
-}
-```
-
-### 3. Get User Statistics
-**GET** `/api/stats/{user_id}`
-```json
-// Response
-{
-  "success": true,
-  "stats": {
-    "total_sessions": 5,
-    "category_breakdown": {
-      "science_math": 2,
-      "history_gk": 2,
-      "general": 1
-    },
-    "topics_learned": ["photosynthesis", "..."],
-    "total_topics": 5
-  }
-}
-```
-
-### 4. Health Check
-**GET** `/api/health`
-```json
-// Response
-{
-  "status": "healthy",
-  "app": "StudySaarthi",
-  "environment": "development"
-}
-```
-
----
 
 ## 🎨 Frontend Features
 
@@ -193,76 +127,7 @@ User Gets: Explanation, Notes, Quiz, Next Topics
 
 ---
 
-## 💾 Data Storage
 
-Student progress is saved locally in JSON files:
-
-### `data/progress.json`
-Stores all learning sessions:
-```json
-[
-  {
-    "user_id": "user_12345",
-    "topic": "photosynthesis",
-    "category": "science_math",
-    "timestamp": "2024-01-15T10:30:00",
-    "session_data": {...}
-  }
-]
-```
-
-### `data/sessions.json`
-Stores session metadata for analytics
-
----
-
-## ⚙️ Configuration
-
-Edit `backend/config.py` to customize:
-
-```python
-# Model settings
-MODEL_CONFIG = {
-    'model': 'gpt-3.5-turbo',
-    'temperature': 0.7,
-    'max_tokens': 1500,
-    'top_p': 0.9
-}
-
-# Add custom categories
-TOPIC_CATEGORIES = {
-    'your_category': {
-        'keywords': ['word1', 'word2'],
-        'depth_level': 'detailed'
-    }
-}
-```
-
----
-
-## 🐛 Troubleshooting
-
-### Common Issues & Solutions
-
-See **[ERROR_FIXES.md](ERROR_FIXES.md)** for:
-- API key not found
-- Connection refused errors
-- Empty responses
-- Timeout issues
-- JSON parsing errors
-- CORS errors
-- Module not found errors
-
-Quick fix for "Module not found":
-```bash
-# Make sure you're in the right directory
-cd backend
-
-# Run app from backend directory
-python app.py
-```
-
----
 
 ## 📊 Example Usage
 
@@ -325,19 +190,7 @@ INPUT → PERCEPTION → REASONING → PLANNING → ACTION → OUTPUT
                                       Next Suggestion
 ```
 
-See **[PITCH.md](PITCH.md)** for detailed judge explanation.
 
----
-
-## 🔐 Security Notes
-
-- API keys stored in `.env` (never committed to git)
-- Input validation on all user fields
-- XSS protection in template rendering
-- HTTPS recommended for production
-- Rate limiting recommended for production
-
----
 
 ## 📈 Future Enhancements
 
@@ -354,41 +207,16 @@ See **[PITCH.md](PITCH.md)** for detailed judge explanation.
 
 ---
 
-## 🚀 Deployment
+-
 
-### Using Gunicorn (Production)
-```bash
-gunicorn --workers 4 --bind 0.0.0.0:5000 backend.app:app
-```
 
-### Using Docker
-See docker configuration in `Dockerfile` (optional)
-
-### Heroku Deployment
-1. Add `Procfile`: `web: gunicorn backend.app:app`
-2. `git push heroku main`
-
----
-
-## 📝 License
-
-MIT License - Feel free to use and modify
-
----
 
 ## 👥 Contributors
 
-Built for ORBIT Agentic Hyperthon 2024
+Built for ORBIT Agentic Hyperthon 2026
 
 ---
 
-## 📞 Support
-
-For issues or questions:
-1. Check [ERROR_FIXES.md](ERROR_FIXES.md)
-2. Review Flask logs in terminal
-3. Check browser console (F12)
-4. Verify `.env` file has correct API key
 
 ---
 
