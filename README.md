@@ -5,7 +5,7 @@
 ![Python](https://img.shields.io/badge/Python-3.8+-green)
 ![Flask](https://img.shields.io/badge/Flask-2.3-white)
 ![OpenAI](https://img.shields.io/badge/OpenAI-API-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
+
 
 ---
 
